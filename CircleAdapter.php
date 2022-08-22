@@ -1,25 +1,6 @@
 <?php
 
-//
-//interface IPublisher
-//{
-//    public function publisher(string $content): void;
-//}
-//
-//
-//class TwitterAdapter implements IPublisher
-//{
-//    private $twitter;
-//    public function __construct(Twitter $twitter)
-//    {
-//        $this->twitter = $twitter;
-//    }
-//
-//
-//    public function publisher(string $content): void
-//    {
-//        $this->twitter>sendTweet($content);
-//    }
+
 
 //2. Реализовать паттерн Адаптер для связи внешней библиотеки (классы SquareAreaLib и
 //CircleAreaLib) вычисления площади квадрата (getSquareArea) и площади круга
@@ -70,19 +51,35 @@ function Circle($circumference){
 
 
 
-//
-////Имеющиеся интерфейсы:
-//
-//interface ISquare
-//{
-//    function squareArea(int $sideSquare);
-//}
-//
-//class SquareAreaLib
-//{
-//    public function getSquareArea(int $diagonal)
-//    {
-//        $area = ($diagonal**2)/2;
-//        return $area;
-//    }
-//}
+//Имеющиеся интерфейсы:
+
+interface ISquare
+{
+    function squareArea(int $sideSquare);
+}
+
+class SquareAreaLib
+{
+    public function getSquareArea(int $diagonal)
+    {
+        $area = ($diagonal**2)/2;
+        return $area;
+    }
+}
+
+class SquareAdapter implements ISquare
+{
+   protected $SquareAdd;
+
+
+    public function __construct()
+    {
+         $this->SquareAdd = new SquareAreaLib();
+    }
+
+    public function squareArea(int $sideSquare)
+    {
+        $this->SquareAdd->getSquareArea($sideSquare);
+    }
+
+}
